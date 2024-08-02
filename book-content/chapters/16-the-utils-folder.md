@@ -488,6 +488,7 @@ Here's how we could rework the `isAlbum` type predicate to be an `assertIsItem` 
 
 ```typescript
 function assertIsAlbum(input: unknown): asserts input is Album {
+  // shouldn't there be a NOT / ! wrapping this whole if statement? Shouldn't you throw if that check FAILS? 
   if (
     typeof input === "object" &&
     input !== null &&
@@ -547,6 +548,7 @@ For example, if the `assertIsAlbum` function doesn't check for all the required 
 
 ```typescript
 function assertIsAlbum(input: unknown): asserts input is Album {
+  // same here
   if (typeof input === "object") {
     throw new Error("Not an Album!");
   }
@@ -1274,6 +1276,7 @@ const result = uniqueArray([1, 1, 2, 3, 4, 4, 5]);
 ```
 
 This is because we haven't passed any type arguments to it. If there's no type argument and no default, it defaults to unknown.
+No it's because `arr` is typed as `any[]` - if you type `arr` as `T[]`, as you do below, this works here and now, without any return type annotation.
 
 We want the type argument to be inferred as a number because we know that the thing we're getting back is an array of numbers.
 
